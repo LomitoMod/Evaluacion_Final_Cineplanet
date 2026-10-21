@@ -68,7 +68,7 @@ public class RegistroServlet extends HttpServlet {
 
     private String validar(String dni, String nombres, String apellidos,
             String correo, String telefono, String clave) {
-        // 1) DNI: 8 digitos numéricos y obligatorio
+        // DNI: 8 digitos numéricos y obligatorio
         if (dni.isEmpty()) {
             return "El DNI es obligatorio.";
         }
@@ -76,17 +76,20 @@ public class RegistroServlet extends HttpServlet {
             return "El DNI debe contener exactamente " + util.ConstantesValidacion.TEXTO_SIZE_8 + " dígitos numéricos.";
         }
 
-        // 2) Nombres: obligatorio, solo alfanumérico y vocales con tildes, máximo 60 caracteres
+        // Nombres: obligatorio, solo alfanumérico y vocales con tildes, máximo 60 caracteres
         if (nombres.isEmpty()) {
             return "Los nombres son obligatorios.";
         }
-        if (nombres.length() > util.ConstantesValidacion.TEXTO_SIZE_60
+        /*if (nombres.length() > util.ConstantesValidacion.TEXTO_SIZE_60
                 || !nombres.matches(util.ConstantesValidacion.TEXT_ALFANUMERICO_60)) {
             return "Los nombres solo deben permitir caracteres alfanuméricos, vocales con tildes y máximo "
                     + util.ConstantesValidacion.TEXTO_SIZE_60 + " caracteres.";
+        }*/
+        if (nombres.length() > util.ConstantesValidacion.TEXTO_SIZE_60) {
+            return "Los nombres solo deben permitir máximo " + util.ConstantesValidacion.TEXTO_SIZE_60 + " caracteres.";
         }
 
-        // 3) Apellidos: obligatorio, solo alfanumérico y vocales con tildes, máximo 60 caracteres
+        // Apellidos: obligatorio, solo alfanumérico y vocales con tildes, máximo 60 caracteres
         if (apellidos.isEmpty()) {
             return "Los apellidos son obligatorios.";
         }
@@ -96,7 +99,7 @@ public class RegistroServlet extends HttpServlet {
                     + util.ConstantesValidacion.TEXTO_SIZE_60 + " caracteres.";
         }
 
-        // 4) Correo: obligatorio, formato seguro (sin caracteres peligrosos), máximo 80 caracteres
+        // Correo: obligatorio, formato seguro (sin caracteres peligrosos), máximo 80 caracteres
         if (correo.isEmpty()) {
             return "El correo electrónico es obligatorio.";
         }
@@ -106,13 +109,13 @@ public class RegistroServlet extends HttpServlet {
                     + util.ConstantesValidacion.TEXTO_SIZE_80 + " caracteres.";
         }
 
-        // 5) Teléfono: opcional, solo números, máximo 15 dígitos
+        // Teléfono: opcional, solo números, máximo 15 dígitos
         if (!telefono.isEmpty() && !telefono.matches(util.ConstantesValidacion.TELEFONO)) {
             return "El teléfono es opcional, pero de ingresarse solo debe contener números (máximo "
                     + util.ConstantesValidacion.TEXTO_SIZE_15 + " dígitos).";
         }
 
-        // 6) Clave: obligatoria, 6 a 15 caracteres, alfanumérico + especiales seguros (@$!%*?&#._-),
+        // Clave: obligatoria, 6 a 15 caracteres, alfanumérico + especiales seguros (@$!%*?&#._-),
         //    al menos 1 mayúscula, 1 minúscula, 1 número y 1 especial.
         if (clave.isEmpty()) {
             return "La clave es obligatoria.";

@@ -43,10 +43,10 @@
                         + max + ' caracteres.');
                 return false;
             }
-            if (C.USUARIO && !C.USUARIO.test(val)) {
+            /*if (C.USUARIO && !C.USUARIO.test(val)) {
                 setError(usuario, 'error-usuario', 'Solo se permiten caracteres alfanuméricos y los símbolos @ . _ % + -');
                 return false;
-            }
+            }*/
             clearError(usuario, 'error-usuario');
             return true;
         }

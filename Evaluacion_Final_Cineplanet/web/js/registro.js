@@ -73,10 +73,10 @@
                 setError(nombres, 'error-nombres', 'Los nombres no pueden exceder los ' + max + ' caracteres.');
                 return false;
             }
-            if (C.TEXT_ALFANUMERICO_60 && !C.TEXT_ALFANUMERICO_60.test(val)) {
+            /*if (C.TEXT_ALFANUMERICO_60 && !C.TEXT_ALFANUMERICO_60.test(val)) {
                 setError(nombres, 'error-nombres', 'Solo se permiten caracteres alfanuméricos y vocales con tildes.');
                 return false;
-            }
+            }*/
             clearError(nombres, 'error-nombres');
             return true;
         }
