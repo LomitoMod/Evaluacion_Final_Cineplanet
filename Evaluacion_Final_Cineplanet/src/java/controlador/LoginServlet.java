@@ -114,10 +114,13 @@ public class LoginServlet extends HttpServlet {
         if (usuario.isEmpty()) {
             return "El usuario o DNI es obligatorio.";
         }
-        if (usuario.length() > ConstantesValidacion.TEXTO_SIZE_30
+        /*if (usuario.length() > ConstantesValidacion.TEXTO_SIZE_30
                 || !usuario.matches(ConstantesValidacion.USUARIO)) {
             return "El usuario o DNI solo permite caracteres alfanuméricos y (@ . _ % + -) hasta "
                     + ConstantesValidacion.TEXTO_SIZE_30 + " caracteres.";
+        }*/
+        if (usuario.length() > ConstantesValidacion.TEXTO_SIZE_30) {
+            return "El usuario o DNI solo permite hasta " + ConstantesValidacion.TEXTO_SIZE_30 + " caracteres.";
         }
         if (clave.isEmpty()) {
             return "La clave es obligatoria.";
