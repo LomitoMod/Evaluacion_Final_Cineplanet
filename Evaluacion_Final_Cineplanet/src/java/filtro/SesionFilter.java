@@ -59,7 +59,7 @@ public class SesionFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         String ruta = req.getServletPath();
 
-        if (PUBLICAS.contains(ruta) || ruta.startsWith("/css/") || ruta.isEmpty()) {
+        if (PUBLICAS.contains(ruta) || ruta.startsWith("/css/") || ruta.startsWith("/js/") || ruta.isEmpty()) {
             chain.doFilter(request, response);
             return;
         }

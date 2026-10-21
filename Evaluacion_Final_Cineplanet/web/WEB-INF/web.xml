@@ -11,6 +11,10 @@
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>util.AppContextListener</listener-class>
+    </listener>
+
     <!-- Sesion de usuario: expira a los 15 minutos de inactividad -->
     <session-config>
         <session-timeout>15</session-timeout>

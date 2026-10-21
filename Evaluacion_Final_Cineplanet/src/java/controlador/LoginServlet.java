@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Cliente;
 import modelo.Usuario;
+import util.ConstantesValidacion;
 import util.Seguridad;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
@@ -30,17 +31,19 @@ public class LoginServlet extends HttpServlet {
         String usuario = req.getParameter("usuario");
         String clave = req.getParameter("clave");
         usuario = usuario == null ? "" : usuario.trim();
+        clave = clave == null ? "" : clave;
 
-        if (usuario.isEmpty() || clave == null || clave.isEmpty()) {
-            redirigirConMensaje(req, resp, Seguridad.MSJ_GENERICO);
+        String error = validar(usuario, clave);
+        if (error != null) {
+            responderError(req, resp, error, usuario);
             return;
         }
 
         if (Seguridad.estaBloqueado(usuario)) {
             AuditoriaDAO.registrar(usuario, AuditoriaDAO.LOGIN_FALLIDO,
                     "Intento sobre cuenta bloqueada", Seguridad.ipDe(req));
-            redirigirConMensaje(req, resp,
-                    "Usuario bloqueado: acceso suspendido 5 minutos. Intenta mas tarde.");
+            responderError(req, resp,
+                    "Usuario bloqueado: acceso suspendido 5 minutos. Intenta más tarde.", usuario);
             return;
         }
 
@@ -55,7 +58,7 @@ public class LoginServlet extends HttpServlet {
             }
         } catch (SQLException e) {
             log("Login: error de consulta", e);
-            redirigirConMensaje(req, resp, Seguridad.MSJ_GENERICO);
+            responderError(req, resp, Seguridad.MSJ_GENERICO, usuario);
             return;
         }
 
@@ -66,10 +69,10 @@ public class LoginServlet extends HttpServlet {
             if (bloqueado) {
                 AuditoriaDAO.registrar(usuario, AuditoriaDAO.BLOQUEO,
                         "Bloqueo de 5 minutos tras 3 intentos fallidos", ip);
-                redirigirConMensaje(req, resp,
-                        "Usuario bloqueado por 5 minutos tras 3 intentos fallidos.");
+                responderError(req, resp,
+                        "Usuario bloqueado por 5 minutos tras 3 intentos fallidos.", usuario);
             } else {
-                redirigirConMensaje(req, resp, Seguridad.MSJ_GENERICO);
+                responderError(req, resp, Seguridad.MSJ_GENERICO, usuario);
             }
             return;
         }
@@ -105,6 +108,38 @@ public class LoginServlet extends HttpServlet {
         sesion.setAttribute(filtro.SesionFilter.ATR_ROL, rol);
         Seguridad.tokenEnSesion(sesion, true);
         resp.sendRedirect(destino);
+    }
+
+    private String validar(String usuario, String clave) {
+        if (usuario.isEmpty()) {
+            return "El usuario o DNI es obligatorio.";
+        }
+        if (usuario.length() > ConstantesValidacion.TEXTO_SIZE_30
+                || !usuario.matches(ConstantesValidacion.USUARIO)) {
+            return "El usuario o DNI solo permite caracteres alfanuméricos y (@ . _ % + -) hasta "
+                    + ConstantesValidacion.TEXTO_SIZE_30 + " caracteres.";
+        }
+        if (clave.isEmpty()) {
+            return "La clave es obligatoria.";
+        }
+        if (clave.length() < ConstantesValidacion.TEXTO_SIZE_6
+                || clave.length() > ConstantesValidacion.TEXTO_SIZE_15) {
+            return "La clave debe tener entre " + ConstantesValidacion.TEXTO_SIZE_6
+                    + " y " + ConstantesValidacion.TEXTO_SIZE_15 + " caracteres.";
+        }
+        if (!clave.matches(ConstantesValidacion.CLAVE)) {
+            return "La clave debe contener entre " + ConstantesValidacion.TEXTO_SIZE_6
+                    + " y " + ConstantesValidacion.TEXTO_SIZE_15
+                    + " caracteres, al menos 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial (@$!%*?&#._-).";
+        }
+        return null;
+    }
+
+    private void responderError(HttpServletRequest req, HttpServletResponse resp,
+            String mensaje, String usuario) throws ServletException, IOException {
+        req.setAttribute("mensaje", mensaje);
+        req.setAttribute("valUsuario", usuario);
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 
     private void redirigirConMensaje(HttpServletRequest req, HttpServletResponse resp, String mensaje)
