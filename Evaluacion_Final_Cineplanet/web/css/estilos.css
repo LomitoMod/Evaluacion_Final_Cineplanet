@@ -1,0 +1,433 @@
+:root {
+  --fondo: #f4f6fb;
+  --tarjeta: #ffffff;
+  --texto: #1f2430;
+  --suave: #6b7280;
+  --borde: #dfe3ea;
+  --cabecera: #141a2e;
+  --cabeceraTexto: #eef1f8;
+  --acento: #e11d48;
+  --acentoOscuro: #be123c;
+  --ok: #15803d;
+  --okFondo: #dcfce7;
+  --warnFondo: #fef3c7;
+  --warnTexto: #92400e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  font-size: 15px;
+}
+
+a {
+  color: var(--acentoOscuro);
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+
+h2 {
+  font-size: 19px;
+  margin: 0 0 10px;
+}
+
+.subtitulo {
+  color: var(--suave);
+  margin: 0 0 18px;
+  font-size: 13px;
+}
+
+.contenedor {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.cabecera {
+  background: var(--cabecera);
+  color: var(--cabeceraTexto);
+  padding: 12px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.marca {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.marca span {
+  font-weight: 400;
+  font-size: 12px;
+  color: #9aa4bd;
+  margin-left: 6px;
+}
+
+.cabecera nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.cabecera nav a {
+  color: var(--cabeceraTexto);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 9px;
+  border-radius: 6px;
+}
+
+.cabecera nav a:hover {
+  background: #232c4a;
+}
+
+.usuario {
+  font-size: 13px;
+  color: #9aa4bd;
+}
+
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.centrado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.ancho {
+  max-width: 420px;
+  width: 100%;
+}
+
+.margen-superior {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+form label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 13px;
+  color: var(--suave);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fff;
+  color: var(--texto);
+}
+
+button,
+.boton {
+  background: var(--acento);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover,
+.boton:hover {
+  background: var(--acentoOscuro);
+}
+
+button.secundario,
+.boton.secundario {
+  background: #334155;
+}
+
+button.pequeno,
+.boton.pequeno {
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+form.inline {
+  display: inline;
+}
+
+.bloque-form {
+  margin-top: 18px;
+}
+
+.aviso {
+  background: var(--warnFondo);
+  color: var(--warnTexto);
+  border: 1px solid #fcd34d;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.exito {
+  background: var(--okFondo);
+  color: var(--ok);
+  border: 1px solid #86efac;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--tarjeta);
+  font-size: 14px;
+}
+
+.tabla th,
+.tabla td {
+  border: 1px solid var(--borde);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.tabla th {
+  background: #eef1f7;
+  font-size: 13px;
+  color: #374151;
+}
+
+.tabla tr:nth-child(even) td {
+  background: #fafbfe;
+}
+
+.texto-derecha {
+  text-align: right;
+}
+
+.grupo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.grupo label {
+  margin: 0;
+  font-size: 13px;
+}
+
+.tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tarjeta-mini {
+  flex: 1 1 220px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.tarjeta-mini h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.tarjeta-mini p {
+  margin: 0 0 12px;
+  color: var(--suave);
+  font-size: 13px;
+}
+
+.insignia {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.insignia.ok {
+  background: var(--okFondo);
+  color: var(--ok);
+}
+
+.insignia.malo {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.mapa {
+  background: #0f172a;
+  border-radius: 10px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.pantalla {
+  background: #334155;
+  color: #cbd5e1;
+  text-align: center;
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.etiqueta {
+  width: 18px;
+  color: #94a3b8;
+  font-size: 12px;
+  text-align: center;
+}
+
+.butaca {
+  position: relative;
+}
+
+.butaca input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.butaca input:disabled {
+  cursor: not-allowed;
+}
+
+.butaca span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 30px;
+  border-radius: 5px 5px 8px 8px;
+  background: #1e293b;
+  color: #cbd5e1;
+  font-size: 11px;
+  border: 1px solid #334155;
+}
+
+.butaca input:not(:disabled):hover + span {
+  border-color: var(--acento);
+}
+
+.butaca input:checked + span {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: #fff;
+  font-weight: 700;
+}
+
+.butaca.ocupada span {
+  background: #4b5563;
+  color: #9ca3af;
+  border-color: #6b7280;
+  text-decoration: line-through;
+}
+
+.leyenda {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.leyenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cuadro {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+.cuadro.ocupado {
+  background: #4b5563;
+}
+
+.cuadro.marcado {
+  background: var(--acento);
+}
+
+.enlace {
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.ayuda {
+  font-size: 12px;
+  color: var(--suave);
+  line-height: 1.6;
+}
+
+.codigo-error {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--acento);
+  margin: 0;
+}
+
+.total {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.dato {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.dato b {
+  color: var(--suave);
+  font-weight: 600;
+}

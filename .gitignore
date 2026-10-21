@@ -1,0 +1,16 @@
+# Salida de compilación
+build/
+dist/
+*.war
+*.class
+
+# Configuración local de NetBeans (rutas de la máquina)
+nbproject/private/
+**/nbproject/private/
+
+# Entregable académico con capturas (no forma parte del código)
+*.docx
+
+# Sistema
+Thumbs.db
+.DS_Store

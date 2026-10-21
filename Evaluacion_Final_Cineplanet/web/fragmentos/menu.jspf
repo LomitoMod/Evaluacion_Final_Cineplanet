@@ -1,0 +1,28 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<header class="cabecera">
+    <div class="marca">Cineplanet<span>Evaluacion Final</span></div>
+    <nav>
+        <c:choose>
+            <c:when test="${rolSesion eq 'CLIENTE'}">
+                <a href="TiendaServlet">Cartelera</a>
+                <a href="CarritoServlet">Carrito</a>
+                <a href="MisEntradasServlet">Mis entradas</a>
+            </c:when>
+            <c:when test="${rolSesion eq 'CAJERO'}">
+                <a href="panel.jsp">Panel</a>
+                <a href="AnularServlet">Anular entrada</a>
+            </c:when>
+            <c:when test="${rolSesion eq 'ADMIN'}">
+                <a href="panel.jsp">Panel</a>
+                <a href="VentaServlet">Ventas</a>
+                <a href="AuditoriaServlet">Auditoria</a>
+                <a href="AnularServlet">Anular entrada</a>
+            </c:when>
+        </c:choose>
+        <span class="usuario"><c:out value="${nombreSesion}"/> (<c:out value="${rolSesion}"/>)</span>
+        <form class="inline" method="post" action="LogoutServlet">
+            <input type="hidden" name="csrf" value="<c:out value='${sessionScope.csrf}'/>">
+            <button class="pequeno secundario" type="submit">Cerrar sesion</button>
+        </form>
+    </nav>
+</header>
